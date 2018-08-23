@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   spec.license            = "MIT"
   spec.source_files       = "ALCameraViewController/**/*.{swift}"
   spec.resources          = ["ALCameraViewController/ViewController/ConfirmViewController.xib", "ALCameraViewController/CameraViewAssets.xcassets", "ALCameraViewController/CameraView.strings"]
-  spec.homepage           = "https://github.com/AlexLittlejohn/ALCameraViewController"
+  spec.homepage           = "https://github.com/Aft3rmathpwnz/ALCameraViewController.git"
   spec.author             = { "Alex Littlejohn" => "alexlittlejohn@me.com" }
   spec.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 end
