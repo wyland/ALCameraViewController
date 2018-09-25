@@ -28,22 +28,31 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
     var verticalPadding: CGFloat = 30
     var horizontalPadding: CGFloat = 30
     
+    var fitSize: FitSize
+    
     public var onComplete: CameraViewCompletion?
+    
+    public enum FitSize {
+        case width
+        case heigth
+    }
     
     let asset: PHAsset?
     let image: UIImage?
     
-    public init(image: UIImage, croppingParameters: CroppingParameters) {
+    public init(image: UIImage, croppingParameters: CroppingParameters, fitImageTo: FitSize = .heigth) {
         self.croppingParameters = croppingParameters
         self.asset = nil
         self.image = image
+        self.fitSize = fitImageTo
         super.init(nibName: "ConfirmViewController", bundle: CameraGlobals.shared.bundle)
     }
     
-    public init(asset: PHAsset, croppingParameters: CroppingParameters) {
+    public init(asset: PHAsset, croppingParameters: CroppingParameters, fitImageTo: FitSize = .heigth) {
         self.croppingParameters = croppingParameters
         self.asset = asset
         self.image = nil
+        self.fitSize = fitImageTo
         super.init(nibName: "ConfirmViewController", bundle: CameraGlobals.shared.bundle)
     }
     
@@ -163,6 +172,9 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
         let scaleWidth = size.width / image.size.width
         let scaleHeight = size.height / image.size.height
         
+        if fitSize == .heigth {
+            return max(scaleWidth, scaleHeight)
+        }
         return min(scaleWidth, scaleHeight)
     }
     
@@ -190,13 +202,9 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
         let imageSize = imageView.frame.size
         var imageOrigin = CGPoint.zero
         
-        if imageSize.width < size.width {
-            imageOrigin.x = (size.width - imageSize.width) / 2
-        }
-        
-        if imageSize.height < size.height {
-            imageOrigin.y = (size.height - imageSize.height) / 2
-        }
+        imageOrigin.x = (size.width - imageSize.width) / 2
+        imageOrigin.y = (size.height - imageSize.height) / 2
+
         
         imageView.frame.origin = imageOrigin
     }
