@@ -181,7 +181,6 @@ internal class CropOverlay: UIView {
                     if (frame.size.height - translation.y) > minimumSize.height {
                         newY = frame.origin.y + translation.y
                     }
-                    print(frame.size.width - translation.x)
                     newFrame = CGRect(x: newX, y: newY, width: frame.size.width - translation.x, height: frame.size.height - translation.y)
                 case cornerButtons[1]:    // Top Right
                     var newY = frame.origin.y
@@ -201,7 +200,7 @@ internal class CropOverlay: UIView {
 					newFrame = CGRect.zero
 				}
 
-                let minimumFrame = CGRect(x: newFrame.origin.x, y: newFrame.origin.y, width: max(newFrame.size.width, minimumSize.width + 2 * outterGap), height: max(newFrame.size.height, minimumSize.height + 2 * outterGap))
+                let minimumFrame = CGRect(x: newFrame.origin.x, y: newFrame.origin.y, width: max(newFrame.size.width, minimumSize.width), height: max(newFrame.size.height, minimumSize.height))
 				frame = minimumFrame
 				layoutSubviews()
 
