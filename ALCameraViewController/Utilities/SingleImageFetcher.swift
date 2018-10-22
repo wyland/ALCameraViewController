@@ -77,8 +77,21 @@ public class SingleImageFetcher {
             options.normalizedCropRect = cropRect
             options.resizeMode = .exact
             
-            let targetWidth = floor(CGFloat(asset.pixelWidth) * cropRect.width)
-			let targetHeight = floor(CGFloat(asset.pixelHeight) * cropRect.height)
+            // костыль для работы фронталок на iOS < 11
+            var targetWidth: CGFloat
+            var targetHeight: CGFloat
+            if #available(iOS 11, *) {
+                targetWidth = floor(CGFloat(asset.pixelWidth) * cropRect.width)
+                targetHeight = floor(CGFloat(asset.pixelHeight) * cropRect.height)
+            } else {
+                if asset.pixelWidth < asset.pixelHeight {
+                    targetWidth = floor(CGFloat(asset.pixelWidth) * cropRect.width)
+                    targetHeight = floor(CGFloat(asset.pixelHeight) * cropRect.height)
+                } else {
+                    targetWidth = floor(CGFloat(asset.pixelWidth) * cropRect.height)
+                    targetHeight = floor(CGFloat(asset.pixelHeight) * cropRect.width)
+                }
+            }
 			
 			targetSize = CGSize(width: targetWidth, height: targetHeight)
         }
