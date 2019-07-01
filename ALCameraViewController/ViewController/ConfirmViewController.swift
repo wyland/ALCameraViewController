@@ -40,7 +40,7 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
     let asset: PHAsset?
     let image: UIImage?
     
-    public init(image: UIImage, croppingParameters: CroppingParameters, fitImageTo: FitSize = .heigth) {
+    public init(image: UIImage, croppingParameters: CroppingParameters, fitImageTo: FitSize = .width) {
         self.croppingParameters = croppingParameters
         self.asset = nil
         self.image = image
@@ -48,7 +48,7 @@ public class ConfirmViewController: UIViewController, UIScrollViewDelegate {
         super.init(nibName: "ConfirmViewController", bundle: CameraGlobals.shared.bundle)
     }
     
-    public init(asset: PHAsset, croppingParameters: CroppingParameters, fitImageTo: FitSize = .heigth) {
+    public init(asset: PHAsset, croppingParameters: CroppingParameters, fitImageTo: FitSize = .width) {
         self.croppingParameters = croppingParameters
         self.asset = asset
         self.image = nil
